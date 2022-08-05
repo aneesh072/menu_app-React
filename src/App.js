@@ -1,12 +1,15 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import items from '../src/components/data.js';
 import Menu from './components/Menu';
 import Catagories from './components/Catagories';
 
+const allCategories = ['all', ...new Set(items.map((item) => item.category))];
+console.log(allCategories);
+
 const App = () => {
   const [menuItems, setMenuItems] = useState(items);
-  const [categoeies, setCategoeies] = useState([]);
+  const [categories, setCategoeies] = useState(allCategories);
 
   const filterItems = (category) => {
     if (category === 'all') {
@@ -24,7 +27,7 @@ const App = () => {
         <h2>Our Menu</h2>
         <div className="underline"> </div>
       </div>
-      <Catagories filterItems={filterItems} />
+      <Catagories filterItems={filterItems} categories={categories} />
       <Menu items={menuItems} />
     </main>
   );
